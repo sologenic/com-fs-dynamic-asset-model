@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package dynamicasset;
+
+option go_package = "github.com/sologenic/com-fs-admin-dynamic-asset-model;dynamicasset";
+
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "sologenic/com-fs-utils-lib/models/audit/audit.proto";
+import "sologenic/com-fs-asset-model/asset.proto";
+
+message DynamicAssetDetails {
+    string DynamicAssetID = 1; 
+    string Title = 2; 
+    string Description = 3; 
+    string Identifier = 4; 
+    string OrganizationID = 5; 
+    repeated asset.Asset Assets = 6; 
+}
+
+message DynamicAsset {
+    DynamicAssetDetails DynamicAsset = 1;
+    metadata.MetaData MetaData = 2;
+    audit.Audit Audit = 3;
+}
+
+message DynamicAssetID {
+    string DynamicAssetID = 1;
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3;
+}
+
+
+message DynamicAssetList {
+    repeated DynamicAsset DynamicAssets = 1;
+    optional int32 Offset = 2;
+    optional int32 Limit = 3;
+    optional int32 Total = 4;
+}
+
+message DynamicAssetFilter {
+    optional string OrganizationID = 1;
+    optional string Identifier = 2;
+    optional metadata.Network Network = 3;
+    optional int32 Limit = 4;
+    optional int32 Offset = 5;
+}

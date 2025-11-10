@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package dynamicasset;
+
+option go_package = "github.com/sologenic/com-fs-admin-dynamic-asset-model;dynamicasset";
+
+import "google/protobuf/empty.proto";
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "dynamic-asset.proto";
+
+service AdminDynamicAssetService {
+    // Create a new dynamic asset
+    rpc Create (DynamicAsset) returns (DynamicAssetID) {}
+    
+    // Update an existing dynamic asset
+    rpc Update (DynamicAsset) returns (DynamicAssetID) {}
+    
+    // Delete a dynamic asset
+    rpc Delete (DynamicAssetID) returns (google.protobuf.Empty) {}
+    
+    // List dynamic assets with filtering
+    rpc List (DynamicAssetFilter) returns (DynamicAssetList) {}
+    
+
+  
+}
+
+message DynamicAssetStatusMessage {
+    string DynamicAssetID = 1;
+    string OrganizationID = 2;
+    optional metadata.Network Network = 3;
+}
+
+message DynamicAssetAuditFilter {
+    optional string DynamicAssetID = 1;
+    optional string OrganizationID = 2;
+    optional string ChangedBy = 3; // UserID who made the changes
+    optional metadata.Network Network = 4;
+    optional int32 Limit = 5;
+    optional int32 Offset = 6;
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package dynamicasset;
+
+option go_package = "github.com/sologenic/com-fs-admin-dynamic-asset-model;dynamicasset";
+
+import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
+import "dynamic-asset.proto";
+
+service UserDynamicAssetService {
+    // Get dynamic asset by identifier (e.g., "news", "promotions")
+    rpc GetByIdentifier (UserDynamicAssetRequest) returns (DynamicAsset) {}
+}
+
+message UserDynamicAssetRequest {
+    string OrganizationID = 1; 
+    string Identifier = 2; // Required: the identifier string (e.g., "news")
+    optional metadata.Network Network = 3; 
+}
