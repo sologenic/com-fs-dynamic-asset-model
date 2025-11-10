@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package dynamicasset;
 
-option go_package = "github.com/sologenic/com-fs-admin-dynamic-asset-model;dynamicasset";
+option go_package = "github.com/sologenic/com-fs-dynamic-asset-model;dynamicasset";
 
 import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "sologenic/com-fs-utils-lib/models/audit/audit.proto";

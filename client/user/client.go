@@ -14,7 +14,7 @@ package dynamicasset
 import (
 	"context"
 
-	dynamicasset "github.com/sologenic/com-fs-admin-dynamic-asset-model"
+	dynamicasset "github.com/sologenic/com-fs-dynamic-asset-model"
 	grpcclient "github.com/sologenic/com-fs-utils-lib/go/grpc-client"
 )
 

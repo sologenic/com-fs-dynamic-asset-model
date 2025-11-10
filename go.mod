@@ -1,4 +1,4 @@
-module github.com/sologenic/com-fs-admin-dynamic-asset-model
+module github.com/sologenic/com-fs-dynamic-asset-model
 
 go 1.24.4
 

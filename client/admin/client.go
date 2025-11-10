@@ -1,5 +1,10 @@
 /*
-The user_store middleware package provides:
+The user_simport (
+	"context"
+
+	dynamicasset "github.com/sologenic/com-fs-dynamic-asset-model"
+	grpcclient "github.com/sologenic/com-fs-utils-lib/go/grpc-client"
+)iddleware package provides:
 - Initialization of the user_store service client
 
 The config:
@@ -14,7 +19,7 @@ package admin
 import (
 	"context"
 
-	"github.com/sologenic/com-fs-admin-dynamic-asset-model"
+	dynamicasset "github.com/sologenic/com-fs-dynamic-asset-model"
 	grpcclient "github.com/sologenic/com-fs-utils-lib/go/grpc-client"
 )
 
