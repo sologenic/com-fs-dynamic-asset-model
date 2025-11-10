@@ -1,9 +1,11 @@
 /*
 The user_simport (
+
 	"context"
 
 	dynamicasset "github.com/sologenic/com-fs-dynamic-asset-model"
 	grpcclient "github.com/sologenic/com-fs-utils-lib/go/grpc-client"
+
 )iddleware package provides:
 - Initialization of the user_store service client
 
