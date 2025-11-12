@@ -40,7 +40,9 @@ The service provides two distinct access patterns:
 
 **Admin Access (admin-dynamicasset-grpc.proto):**
 
-- Full CRUD operations (Create, Read, Update, Delete)
+- Upsert operations (Create or Update in single call)
+- Read operations (Get by ID)
+- Delete operations
 - List operations with filtering
 - Status management (activate/deactivate)
 - Audit trail access

@@ -274,19 +274,9 @@ export const DynamicAssetAuditFilter = {
 
 export type AdminDynamicAssetServiceService = typeof AdminDynamicAssetServiceService;
 export const AdminDynamicAssetServiceService = {
-  /** Create a new dynamic asset */
-  create: {
-    path: "/dynamicasset.AdminDynamicAssetService/Create",
-    requestStream: false,
-    responseStream: false,
-    requestSerialize: (value: DynamicAsset) => Buffer.from(DynamicAsset.encode(value).finish()),
-    requestDeserialize: (value: Buffer) => DynamicAsset.decode(value),
-    responseSerialize: (value: DynamicAssetID) => Buffer.from(DynamicAssetID.encode(value).finish()),
-    responseDeserialize: (value: Buffer) => DynamicAssetID.decode(value),
-  },
-  /** Update an existing dynamic asset */
-  update: {
-    path: "/dynamicasset.AdminDynamicAssetService/Update",
+  /** Create or update a dynamic asset */
+  upsert: {
+    path: "/dynamicasset.AdminDynamicAssetService/Upsert",
     requestStream: false,
     responseStream: false,
     requestSerialize: (value: DynamicAsset) => Buffer.from(DynamicAsset.encode(value).finish()),
@@ -317,10 +307,8 @@ export const AdminDynamicAssetServiceService = {
 } as const;
 
 export interface AdminDynamicAssetServiceServer extends UntypedServiceImplementation {
-  /** Create a new dynamic asset */
-  create: handleUnaryCall<DynamicAsset, DynamicAssetID>;
-  /** Update an existing dynamic asset */
-  update: handleUnaryCall<DynamicAsset, DynamicAssetID>;
+  /** Create or update a dynamic asset */
+  upsert: handleUnaryCall<DynamicAsset, DynamicAssetID>;
   /** Delete a dynamic asset */
   delete: handleUnaryCall<DynamicAssetID, Empty>;
   /** List dynamic assets with filtering */
@@ -328,33 +316,17 @@ export interface AdminDynamicAssetServiceServer extends UntypedServiceImplementa
 }
 
 export interface AdminDynamicAssetServiceClient extends Client {
-  /** Create a new dynamic asset */
-  create(
+  /** Create or update a dynamic asset */
+  upsert(
     request: DynamicAsset,
     callback: (error: ServiceError | null, response: DynamicAssetID) => void,
   ): ClientUnaryCall;
-  create(
-    request: DynamicAsset,
-    metadata: Metadata,
-    callback: (error: ServiceError | null, response: DynamicAssetID) => void,
-  ): ClientUnaryCall;
-  create(
-    request: DynamicAsset,
-    metadata: Metadata,
-    options: Partial<CallOptions>,
-    callback: (error: ServiceError | null, response: DynamicAssetID) => void,
-  ): ClientUnaryCall;
-  /** Update an existing dynamic asset */
-  update(
-    request: DynamicAsset,
-    callback: (error: ServiceError | null, response: DynamicAssetID) => void,
-  ): ClientUnaryCall;
-  update(
+  upsert(
     request: DynamicAsset,
     metadata: Metadata,
     callback: (error: ServiceError | null, response: DynamicAssetID) => void,
   ): ClientUnaryCall;
-  update(
+  upsert(
     request: DynamicAsset,
     metadata: Metadata,
     options: Partial<CallOptions>,

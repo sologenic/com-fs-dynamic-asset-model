@@ -9,11 +9,8 @@ import "sologenic/com-fs-utils-lib/models/metadata/metadata.proto";
 import "dynamic-asset.proto";
 
 service AdminDynamicAssetService {
-    // Create a new dynamic asset
-    rpc Create (DynamicAsset) returns (DynamicAssetID) {}
-    
-    // Update an existing dynamic asset
-    rpc Update (DynamicAsset) returns (DynamicAssetID) {}
+    // Create or update a dynamic asset
+    rpc Upsert (DynamicAsset) returns (DynamicAssetID) {}
     
     // Delete a dynamic asset
     rpc Delete (DynamicAssetID) returns (google.protobuf.Empty) {}

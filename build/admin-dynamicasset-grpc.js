@@ -222,19 +222,9 @@ export const DynamicAssetAuditFilter = {
     },
 };
 export const AdminDynamicAssetServiceService = {
-    /** Create a new dynamic asset */
-    create: {
-        path: "/dynamicasset.AdminDynamicAssetService/Create",
-        requestStream: false,
-        responseStream: false,
-        requestSerialize: (value) => Buffer.from(DynamicAsset.encode(value).finish()),
-        requestDeserialize: (value) => DynamicAsset.decode(value),
-        responseSerialize: (value) => Buffer.from(DynamicAssetID.encode(value).finish()),
-        responseDeserialize: (value) => DynamicAssetID.decode(value),
-    },
-    /** Update an existing dynamic asset */
-    update: {
-        path: "/dynamicasset.AdminDynamicAssetService/Update",
+    /** Create or update a dynamic asset */
+    upsert: {
+        path: "/dynamicasset.AdminDynamicAssetService/Upsert",
         requestStream: false,
         responseStream: false,
         requestSerialize: (value) => Buffer.from(DynamicAsset.encode(value).finish()),

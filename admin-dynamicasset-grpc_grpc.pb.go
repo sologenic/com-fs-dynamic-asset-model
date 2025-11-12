@@ -20,8 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AdminDynamicAssetService_Create_FullMethodName = "/dynamicasset.AdminDynamicAssetService/Create"
-	AdminDynamicAssetService_Update_FullMethodName = "/dynamicasset.AdminDynamicAssetService/Update"
+	AdminDynamicAssetService_Upsert_FullMethodName = "/dynamicasset.AdminDynamicAssetService/Upsert"
 	AdminDynamicAssetService_Delete_FullMethodName = "/dynamicasset.AdminDynamicAssetService/Delete"
 	AdminDynamicAssetService_List_FullMethodName   = "/dynamicasset.AdminDynamicAssetService/List"
 )
@@ -30,10 +29,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AdminDynamicAssetServiceClient interface {
-	// Create a new dynamic asset
-	Create(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error)
-	// Update an existing dynamic asset
-	Update(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error)
+	// Create or update a dynamic asset
+	Upsert(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error)
 	// Delete a dynamic asset
 	Delete(ctx context.Context, in *DynamicAssetID, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// List dynamic assets with filtering
@@ -48,20 +45,10 @@ func NewAdminDynamicAssetServiceClient(cc grpc.ClientConnInterface) AdminDynamic
 	return &adminDynamicAssetServiceClient{cc}
 }
 
-func (c *adminDynamicAssetServiceClient) Create(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error) {
+func (c *adminDynamicAssetServiceClient) Upsert(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DynamicAssetID)
-	err := c.cc.Invoke(ctx, AdminDynamicAssetService_Create_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *adminDynamicAssetServiceClient) Update(ctx context.Context, in *DynamicAsset, opts ...grpc.CallOption) (*DynamicAssetID, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DynamicAssetID)
-	err := c.cc.Invoke(ctx, AdminDynamicAssetService_Update_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AdminDynamicAssetService_Upsert_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -92,10 +79,8 @@ func (c *adminDynamicAssetServiceClient) List(ctx context.Context, in *DynamicAs
 // All implementations should embed UnimplementedAdminDynamicAssetServiceServer
 // for forward compatibility.
 type AdminDynamicAssetServiceServer interface {
-	// Create a new dynamic asset
-	Create(context.Context, *DynamicAsset) (*DynamicAssetID, error)
-	// Update an existing dynamic asset
-	Update(context.Context, *DynamicAsset) (*DynamicAssetID, error)
+	// Create or update a dynamic asset
+	Upsert(context.Context, *DynamicAsset) (*DynamicAssetID, error)
 	// Delete a dynamic asset
 	Delete(context.Context, *DynamicAssetID) (*emptypb.Empty, error)
 	// List dynamic assets with filtering
@@ -109,11 +94,8 @@ type AdminDynamicAssetServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAdminDynamicAssetServiceServer struct{}
 
-func (UnimplementedAdminDynamicAssetServiceServer) Create(context.Context, *DynamicAsset) (*DynamicAssetID, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
-func (UnimplementedAdminDynamicAssetServiceServer) Update(context.Context, *DynamicAsset) (*DynamicAssetID, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+func (UnimplementedAdminDynamicAssetServiceServer) Upsert(context.Context, *DynamicAsset) (*DynamicAssetID, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Upsert not implemented")
 }
 func (UnimplementedAdminDynamicAssetServiceServer) Delete(context.Context, *DynamicAssetID) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -141,38 +123,20 @@ func RegisterAdminDynamicAssetServiceServer(s grpc.ServiceRegistrar, srv AdminDy
 	s.RegisterService(&AdminDynamicAssetService_ServiceDesc, srv)
 }
 
-func _AdminDynamicAssetService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AdminDynamicAssetService_Upsert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DynamicAsset)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminDynamicAssetServiceServer).Create(ctx, in)
+		return srv.(AdminDynamicAssetServiceServer).Upsert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: AdminDynamicAssetService_Create_FullMethodName,
+		FullMethod: AdminDynamicAssetService_Upsert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminDynamicAssetServiceServer).Create(ctx, req.(*DynamicAsset))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AdminDynamicAssetService_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DynamicAsset)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AdminDynamicAssetServiceServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AdminDynamicAssetService_Update_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminDynamicAssetServiceServer).Update(ctx, req.(*DynamicAsset))
+		return srv.(AdminDynamicAssetServiceServer).Upsert(ctx, req.(*DynamicAsset))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -221,12 +185,8 @@ var AdminDynamicAssetService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*AdminDynamicAssetServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Create",
-			Handler:    _AdminDynamicAssetService_Create_Handler,
-		},
-		{
-			MethodName: "Update",
-			Handler:    _AdminDynamicAssetService_Update_Handler,
+			MethodName: "Upsert",
+			Handler:    _AdminDynamicAssetService_Upsert_Handler,
 		},
 		{
 			MethodName: "Delete",
