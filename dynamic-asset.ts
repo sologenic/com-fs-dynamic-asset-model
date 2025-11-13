@@ -6,7 +6,6 @@
 
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Asset } from "./sologenic/com-fs-asset-model/asset";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import {
   MetaData,
@@ -23,7 +22,8 @@ export interface DynamicAssetDetails {
   Description: string;
   Identifier: string;
   OrganizationID: string;
-  Assets: Asset[];
+  /** Array of asset keys (strings) instead of full asset objects */
+  AssetKeys: string[];
 }
 
 export interface DynamicAsset {
@@ -54,7 +54,7 @@ export interface DynamicAssetFilter {
 }
 
 function createBaseDynamicAssetDetails(): DynamicAssetDetails {
-  return { DynamicAssetID: "", Title: "", Description: "", Identifier: "", OrganizationID: "", Assets: [] };
+  return { DynamicAssetID: "", Title: "", Description: "", Identifier: "", OrganizationID: "", AssetKeys: [] };
 }
 
 export const DynamicAssetDetails = {
@@ -74,8 +74,8 @@ export const DynamicAssetDetails = {
     if (message.OrganizationID !== "") {
       writer.uint32(42).string(message.OrganizationID);
     }
-    for (const v of message.Assets) {
-      Asset.encode(v!, writer.uint32(50).fork()).ldelim();
+    for (const v of message.AssetKeys) {
+      writer.uint32(50).string(v!);
     }
     return writer;
   },
@@ -127,7 +127,7 @@ export const DynamicAssetDetails = {
             break;
           }
 
-          message.Assets.push(Asset.decode(reader, reader.uint32()));
+          message.AssetKeys.push(reader.string());
           continue;
       }
       if ((tag & 7) === 4 || tag === 0) {
@@ -145,7 +145,9 @@ export const DynamicAssetDetails = {
       Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
       Identifier: isSet(object.Identifier) ? globalThis.String(object.Identifier) : "",
       OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-      Assets: globalThis.Array.isArray(object?.Assets) ? object.Assets.map((e: any) => Asset.fromJSON(e)) : [],
+      AssetKeys: globalThis.Array.isArray(object?.AssetKeys)
+        ? object.AssetKeys.map((e: any) => globalThis.String(e))
+        : [],
     };
   },
 
@@ -166,8 +168,8 @@ export const DynamicAssetDetails = {
     if (message.OrganizationID !== "") {
       obj.OrganizationID = message.OrganizationID;
     }
-    if (message.Assets?.length) {
-      obj.Assets = message.Assets.map((e) => Asset.toJSON(e));
+    if (message.AssetKeys?.length) {
+      obj.AssetKeys = message.AssetKeys;
     }
     return obj;
   },
@@ -182,7 +184,7 @@ export const DynamicAssetDetails = {
     message.Description = object.Description ?? "";
     message.Identifier = object.Identifier ?? "";
     message.OrganizationID = object.OrganizationID ?? "";
-    message.Assets = object.Assets?.map((e) => Asset.fromPartial(e)) || [];
+    message.AssetKeys = object.AssetKeys?.map((e) => e) || [];
     return message;
   },
 };

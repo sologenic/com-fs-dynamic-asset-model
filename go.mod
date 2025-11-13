@@ -3,7 +3,6 @@ module github.com/sologenic/com-fs-dynamic-asset-model
 go 1.24.4
 
 require (
-	github.com/sologenic/com-fs-asset-model v0.0.0-20251021201834-36ccc38df721
 	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20251107220602-a0757ed42489
 	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250917193130-a63d775c7b6d
 	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250917193130-a63d775c7b6d

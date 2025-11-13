@@ -5,12 +5,11 @@
 // source: dynamic-asset.proto
 /* eslint-disable */
 import _m0 from "protobufjs/minimal";
-import { Asset } from "./sologenic/com-fs-asset-model/asset";
 import { Audit } from "./sologenic/com-fs-utils-lib/models/audit/audit";
 import { MetaData, networkFromJSON, networkToJSON, } from "./sologenic/com-fs-utils-lib/models/metadata/metadata";
 export const protobufPackage = "dynamicasset";
 function createBaseDynamicAssetDetails() {
-    return { DynamicAssetID: "", Title: "", Description: "", Identifier: "", OrganizationID: "", Assets: [] };
+    return { DynamicAssetID: "", Title: "", Description: "", Identifier: "", OrganizationID: "", AssetKeys: [] };
 }
 export const DynamicAssetDetails = {
     encode(message, writer = _m0.Writer.create()) {
@@ -29,8 +28,8 @@ export const DynamicAssetDetails = {
         if (message.OrganizationID !== "") {
             writer.uint32(42).string(message.OrganizationID);
         }
-        for (const v of message.Assets) {
-            Asset.encode(v, writer.uint32(50).fork()).ldelim();
+        for (const v of message.AssetKeys) {
+            writer.uint32(50).string(v);
         }
         return writer;
     },
@@ -75,7 +74,7 @@ export const DynamicAssetDetails = {
                     if (tag !== 50) {
                         break;
                     }
-                    message.Assets.push(Asset.decode(reader, reader.uint32()));
+                    message.AssetKeys.push(reader.string());
                     continue;
             }
             if ((tag & 7) === 4 || tag === 0) {
@@ -92,7 +91,9 @@ export const DynamicAssetDetails = {
             Description: isSet(object.Description) ? globalThis.String(object.Description) : "",
             Identifier: isSet(object.Identifier) ? globalThis.String(object.Identifier) : "",
             OrganizationID: isSet(object.OrganizationID) ? globalThis.String(object.OrganizationID) : "",
-            Assets: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.Assets) ? object.Assets.map((e) => Asset.fromJSON(e)) : [],
+            AssetKeys: globalThis.Array.isArray(object === null || object === void 0 ? void 0 : object.AssetKeys)
+                ? object.AssetKeys.map((e) => globalThis.String(e))
+                : [],
         };
     },
     toJSON(message) {
@@ -113,8 +114,8 @@ export const DynamicAssetDetails = {
         if (message.OrganizationID !== "") {
             obj.OrganizationID = message.OrganizationID;
         }
-        if ((_a = message.Assets) === null || _a === void 0 ? void 0 : _a.length) {
-            obj.Assets = message.Assets.map((e) => Asset.toJSON(e));
+        if ((_a = message.AssetKeys) === null || _a === void 0 ? void 0 : _a.length) {
+            obj.AssetKeys = message.AssetKeys;
         }
         return obj;
     },
@@ -129,7 +130,7 @@ export const DynamicAssetDetails = {
         message.Description = (_c = object.Description) !== null && _c !== void 0 ? _c : "";
         message.Identifier = (_d = object.Identifier) !== null && _d !== void 0 ? _d : "";
         message.OrganizationID = (_e = object.OrganizationID) !== null && _e !== void 0 ? _e : "";
-        message.Assets = ((_f = object.Assets) === null || _f === void 0 ? void 0 : _f.map((e) => Asset.fromPartial(e))) || [];
+        message.AssetKeys = ((_f = object.AssetKeys) === null || _f === void 0 ? void 0 : _f.map((e) => e)) || [];
         return message;
     },
 };
