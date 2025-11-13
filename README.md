@@ -16,16 +16,28 @@ The dynamic asset service is multi-organizational. This means that dynamic asset
 
 ```protobuf
 message DynamicAssetDetails {
-    string DynamicAssetID = 1;
-    string Title = 2;
-    string Description = 3;
+    string DynamicAssetID = 1; 
+    string Title = 2; 
+    string Description = 3; 
     string Identifier = 4; // Unique identifier string (e.g., "news", "promotions") used by FE to identify the asset collection
     string OrganizationID = 5; // UUID of the organization
-    repeated asset.Asset Assets = 6; // Array of assets from the asset model
+    repeated string AssetKeys = 6; // Array of asset keys (strings) - applications must fetch full asset details separately
 }
 ```
 
-### Organization Scoping
+### Asset Key Architecture
+
+Dynamic assets now store only `AssetKeys` (strings) rather than full asset objects. This provides several benefits:
+
+- **Data Consistency**: Asset information remains synchronized with the main asset database
+- **Reduced Storage**: Smaller dynamic asset records
+- **Separation of Concerns**: Asset management and dynamic asset grouping are decoupled
+- **Performance**: Faster dynamic asset operations, asset details fetched only when needed
+
+**Usage Pattern:**
+1. Store dynamic asset with `AssetKeys: ["asset-key-1", "asset-key-2"]`
+2. When displaying, webapp calls the asset service: `GET /asset/{asset-key}` for each key
+3. Combine dynamic asset metadata with fresh asset details### Organization Scoping
 
 Dynamic assets are identified by a combination of:
 
