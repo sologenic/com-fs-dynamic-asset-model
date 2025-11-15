@@ -38,7 +38,9 @@ Dynamic assets now store only `AssetKeys` (strings) rather than full asset objec
 
 1. Store dynamic asset with `AssetKeys: ["asset-key-1", "asset-key-2"]`
 2. When displaying, webapp calls the asset service: `GET /asset/{asset-key}` for each key
-3. Combine dynamic asset metadata with fresh asset details### Organization Scoping
+3. Combine dynamic asset metadata with fresh asset details
+
+### Organization Scoping
 
 Dynamic assets are identified by a combination of:
 
@@ -70,15 +72,6 @@ The service provides two distinct access patterns:
 
 The client for golang and typescript are provided in the `/client` directory.
 
-## Start the service
-
-The client is self initializing. For this it requires the following environment variable:
-
-- `DYNAMIC_ASSET_STORE` - The host of the service. Host is in the format `host:port`
-- `DYNAMIC_ASSET_STORE_TESTING` - Starts the GRPC service in testmode with an in memory buffer. Presence of the variable with the value `TRUE` is required to put the client in test mode.
-
-If the client is included and none of the env variables are set, the client panics.
-
 ## Building the required files
 
 Generating these files can be done by running a build script with following command, which will also generate TypeScript files, a build dir and add newly generated files and dir to git commit.
@@ -91,5 +84,12 @@ This will generate:
 
 - Go protobuf files (\*.pb.go)
 - TypeScript files (\*.ts)
-- Compiled JavaScript files (build/\*.js)
 - Type definition files (build/\*.d.ts)
+
+## Start Parameters
+
+The client is self initializing. For this it requires the following environment variable:
+
+- `DYNAMIC_ASSET_STORE` - The host of the service. Host is in the format `host:port`
+
+If the client is included and none of the env variables are set, the client panics.
