@@ -6,6 +6,7 @@
 - [dynamic-asset.proto](#dynamic-asset)
   - [Messages](#messages)
     - [DynamicAssetDetails](#dynamicassetdetails)
+    - [DynamicAsset](#dynamicasset)
     - [DynamicAssetID](#dynamicassetid)
     - [DynamicAssetList](#dynamicassetlist)
     - [DynamicAssetFilter](#dynamicassetfilter)
@@ -14,12 +15,12 @@
 
 ## Overview
 
-The Dynamic Asset provides a comprehensive data structure for managing dynamic asset within the system. This model supports metadata and audit: includes metadata and audit trails for tracking changes, identification: provides unique identifiers for dynamic asset, organizational context: links items to organizations via organizationid, and more. 
+The Dynamic Asset provides a comprehensive data structure for managing dynamic asset within the system. This model supports identification: provides unique identifiers for dynamic asset, organizational context: links items to organizations via organizationid, metadata and audit: includes metadata and audit trails for tracking changes, and more. 
 
 Key features of the {model_name.lower()} model include:
-- **Metadata and Audit**: Includes metadata and audit trails for tracking changes
 - **Identification**: Provides unique identifiers for dynamic asset
 - **Organizational Context**: Links items to organizations via OrganizationID
+- **Metadata and Audit**: Includes metadata and audit trails for tracking changes
 - **Pagination Support**: Provides offset-based pagination for collections
 
 ## dynamic-asset.proto
@@ -43,15 +44,42 @@ The `DynamicAssetDetails` message contains all the core information about a dyna
 
 | Field Name | Type | Required/Optional | Description |
 |------------|------|-------------------|-------------|
-| MetaData | `ta.MetaData` | Required | Metadata information including network and version details |
-| Audit | `audit.Audit` | Required | Audit trail information for tracking changes and access |
+| DynamicAssetID | `string` | Required | Unique identifier for the dynamicasset |
+| Title | `string` | Required | Title value |
+| Description | `string` | Required | Additional descriptive information about this item |
+| Identifier | `string` | Required | Unique identifier for the identifier |
+| OrganizationID | `string` | Required | UUID of the organization this item belongs to |
+| AssetKeys | `string` | Optional | AssetKeys value |
 
 **Use Cases:**
 - Creating new dynamicasset records with complete information
 - Updating dynamicasset information
+- Associating items with specific organizations
 
 **Important Notes:**
-- This message provides the dynamicassetdetails representation
+- The `DynamicAssetID` field must match a valid identifier format
+- The `Identifier` field must match a valid identifier format
+- The `OrganizationID` must be a valid UUID format
+
+#### DynamicAsset {#dynamicasset}
+
+The `DynamicAsset` message provides dynamicasset data and operations.
+
+**Field Table:**
+
+| Field Name | Type | Required/Optional | Description |
+|------------|------|-------------------|-------------|
+| DynamicAsset | `DynamicAssetDetails` | Required | DynamicAsset field |
+| MetaData | `metadata.MetaData` | Required | Metadata information including network and version details |
+| Audit | `audit.Audit` | Required | Audit trail information for tracking changes and access |
+
+**Use Cases:**
+- Creating new dynamicasset records
+- Retrieving dynamicasset information
+- Updating dynamicasset data
+
+**Important Notes:**
+- This message provides the dynamicasset representation
 
 #### DynamicAssetID {#dynamicassetid}
 
