@@ -17,7 +17,7 @@
 
 The Dynamic Asset provides a comprehensive data structure for managing dynamic asset within the system. This model supports identification: provides unique identifiers for dynamic asset, organizational context: links items to organizations via organizationid, metadata and audit: includes metadata and audit trails for tracking changes, and more. 
 
-Key features of the {model_name.lower()} model include:
+Key features of the dynamic asset model include:
 - **Identification**: Provides unique identifiers for dynamic asset
 - **Organizational Context**: Links items to organizations via OrganizationID
 - **Metadata and Audit**: Includes metadata and audit trails for tracking changes
