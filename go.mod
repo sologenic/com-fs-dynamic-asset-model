@@ -1,11 +1,11 @@
 module github.com/sologenic/com-fs-dynamic-asset-model
 
-go 1.24.4
+go 1.25.5
 
 require (
-	github.com/sologenic/com-fs-utils-lib/go/grpc-client v0.0.0-20251107220602-a0757ed42489
-	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20250917193130-a63d775c7b6d
-	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20250917193130-a63d775c7b6d
+	github.com/sologenic/com-fs-utils-internal-lib/go/grpc-client v0.0.0-20260130172224-843f6dae3696
+	github.com/sologenic/com-fs-utils-lib/models/audit v0.0.0-20260130170755-ffa545a27df1
+	github.com/sologenic/com-fs-utils-lib/models/metadata v0.0.0-20260130170755-ffa545a27df1
 	google.golang.org/grpc v1.75.1
 	google.golang.org/protobuf v1.36.9
 )
@@ -24,7 +24,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/rs/zerolog v1.34.0 // indirect
-	github.com/sologenic/com-fs-utils-lib/go/logger v0.0.0-20240906214824-8118c42c5b35 // indirect
+	github.com/sologenic/com-fs-utils-internal-lib/go/logger v0.0.0-20260130172224-843f6dae3696 // indirect
 	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.63.0 // indirect
 	go.opentelemetry.io/otel v1.38.0 // indirect
