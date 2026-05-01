@@ -8,7 +8,6 @@ export interface DynamicAssetDetails {
     Description: string;
     Identifier: string;
     OrganizationID: string;
-    /** Array of asset keys (strings) instead of full asset objects */
     AssetKeys: string[];
 }
 export interface DynamicAsset {
